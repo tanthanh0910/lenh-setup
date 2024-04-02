@@ -1,0 +1,36 @@
+ssh bee (bee tên serve)
+- lên cái web họ congig trỏ về ip serve mình
+-gõ sh connect vô serve
+- ping qua serve mình ping ex: outletstaging.ftech.ltd
+- telnet kiểm tra port ex ( telnet serve mình(""192.186.22.32)) 22 brew install telnet check port
+- cài mọi thứ như php mysql ...
+-  ufw xem port mở chưa mysql
+- sudo ufw status
+- nano .env xem file
+- cat xem toàn bộ nội dung fule
+- ls -la xem toàn bộ file trong thu mục khi vào trong source
+- rồi cấp quyền cho www-data ( sudo chown -R /var/ww/tên soucere/tên thư mục )
+- pwd kiểm tra đường dẫn đnag đứng
+- conposer install
+- nvm use v14.20.1 && npm install ( xét version vs npm cho FE) nếu có
+- nếu lỗi sudo npm install
+- copy .env như local 
+- mởi file env nano .env
+- chạy migrate vs seed
+- crontab -e ( chạy job tới h chạy, queue hàng đợi)
+- sudo serivice cron reload
+- chạy job hay queue  * * * * * cd /var/www/speech-academy-laravel-backend && php artisan schedule:run >> /dev/null 2>&1 
+and 
+[program:speech-academy-laravel-backend-queue]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/speech-academy-laravel-backend/artisan queue:work
+autostart=true
+autorestart=true
+user=www-data
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/var/www/speech-academy-laravel-backend/storage/logs/laravel.log
+
+#path: /etc/supervisor/conf.d in ubuntu
+ - chạy reload ngix vs cron đồ
+ 

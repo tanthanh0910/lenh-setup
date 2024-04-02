@@ -1,0 +1,84 @@
++ Xem cái đang có trong docker dung
+	docker
++ Muốn download 1 cái gì ta dùng:
+	docker pull ….
++ Pull serve local nginx ( Giống nhứ git clone)
+	docker pull nginx
++ Tạo 1 cái nignx mới ( -it chạy trong terminal, load trong container, -d là chạy ngầm, -if sẽ phải mở tab mới, -d ko cần mở tab mới tiện hơn -it , 8080 port đầu vào của máy, 80 port là của container)
+	docker run -it -p 8080:80 nginx OR docker run -d -p 8080:80 nginx ( tắt đi dung docker stop containerID, muốn khởi động lại nignx thì dung docker start containerID (or Tên) )
+	OR docker run -d -p 8080:80 –name mynginx nginx ( mynginx là của container mình đặt , nginx là tên image)
+	localhost:8080
+	1 serve trên máy done
++ Qua docker desktop in image will see have a nginx status ( IN USE )
++ Xem cái docker đang run
+	docker ps
++ Xem các docker đang run và đã tắt
+	docker ps -a
++ Kiểm tra image đang chạy và đã download về local
+	docker images
++ How to delete container
+	docker rm CONTAINER_ID
++ How to delete images
+	docker rmi name or docker rmi imageID
++ Xem tất cả docker đang hỗ trợ
+	docker run –help
++ Docker hub search browser
++ Vào bên trong container xem các file bên trong  ( bash lấy dòng terminal xem bên trong )
+	docker exec -it name_container bash
++ /usr/share/nginx
++ Cách add 1 file hay folder vào nginx để hiển thị ra view chạy port localhost:8080. Map 1 cái folder gốc ở máy đến folder của share nginx
+	docker run -d -p 8080:80 –name mynignx -v “E:\C\html”:/usr/share/nginx/html nginx ( for windown )
+	docker run -d -p 8080:80 –name mynignx -v ~/html:/usr/share/nginx/html nginx ( for mac)
++ Xem logs
+	docker logs mynginx
++ Copy file logs trên nginx về file local (“E:\C\logs”:/var/log/nginx copy logs từ nginx về local)
+	docker run -d -p 8080:80 –name mynginx -v “E:\C\html”:/usr/share/nginx/html- v “E:\C\logs”:/var/log/nginx nginx
++ ///// Phần khác gắn ngọn hơn file trên
++ Dockerfile là nơi để thực hiện chạy cái lệnh như file hướng dẫn
+	. FORM nginx
+    . COPY html /usr/share/nginx/html
+// có cái hình ở đây
++ Để chạy dòng lệnh build ảnh trên ( dấu “.” ở đây là tìm file Dockerfile ngoài cùng )
+	docker build -t my_nginx_vietnam . OR docker build -t my_nginx_vietnam:1.0 .
++ Chạy 1 file docker container để hiển thị view ( my_nginx_vietnam là images có thể thêm my_nginx_vietnam:1.0, để bth sẽ lấy cái last, khỏi cần -v ở trên )
+	docker run -d -p 8080:80 –name mynginx-vietnam my_nginx_vietnam
+	gõ docker ps -a để kiểm tra
++ Để đẩy lên cho mọi người dung hay xem có docker hub ( giống như gitlab hay github )
+	docker login ( nhập user name và password , cần tạo tk docker hub)
+	docker tag my_nginx_vietnam:1.0 username/đặt_ten:5.7.21 ( my_nginx_vietnam:1.0 là tên image của chúng ta nếu ko có 1.0 sẽ lấy mới nhất, username là tên tk docker hub, đặt_ten:5.7.21 đặt tên)
+	docker images
+	docker push username/đặt_ten:24.10.23 ( username/đặt_ten:24.10.23 images )
+	docker rmi username/đặt_ten:24.10.23 ( thêm tag 24.10.23 mới xoá được, trong name sẽ không có  24.10.23)
+
++ Nếu ai muốn pull cái file docker hub mình về
+	docker pull username/đặt_ten:24.10.23 ( username/đặt_ten:24.10.23 tên lúc mình đẩy lên)
+	docker images
+	docker run -d -p 8081:80 –name my-nginx-vietnam-2 username/đặt_ten:24.10.23 ( nếu trùng port đổi thành 8081, my-nginx-vietnam-2 mình tự đặt tên, username/đặt_ten:24.10.23 lấy trong images)
+	docker ps -a ( Kiểm tra container đang chạy và xem có trùng port hay name hay không, có thể xoá đi dung docker rm containerId)
+// có cái hình ở đây
++ run không cần port
+	docker run -dt –name my-node-app my-node-image
+
+WORKDIR thư mục làm việc hiện hành
++ Vào bên trong thư mục  ( my-node-app name của docker ps -a or của container )
+	docker exec -it my-node-app bash
+// có cái hình ở đây
++ Sẽ có 1 file dockerignore để loại bỏ những thư mục ko cần đẩy lên
++ Sẽ có cú pháp CMD [“yarn”, “start”], qua bên package.json chỗ scripts : them “start” : “node index”
+// có cái hình ở đây
++ Muốn build lại file dockerfile ta xoá image và container đi xong build lại vì thêm nội dung cái mới vào dockerfile rồi run
++ Vì mỗi lần sửa trong dockerfile phải build và run lại nên ta có thêm 1 file docker-compose.yml
+// có cái hình ở đây
++ docker-compose sẽ vừa run vừa build
++ context là nơi cần tìm tất cả các file cần build ra dockerimage là thư mục hiện hành
++ 4001:4000 port 4000 là port phía container port 4001 là port trên máy tính
++ chạy file docker-compose.yml
+	 docker-compose up -d ( localhost:4001)
++ Khi sửa nội dung trong file Dockerfile ta chạy
+	docker-compose build
++ Muỗn xoá đi ta dùng
+	 docker-compose down
+	docker ps -a
+
+
+

@@ -1,0 +1,10 @@
+Tất cả các file liên quan tới swagger thì sẽ được định nghĩa ở tai thư mục: App\Swaggers
+
+// có cái hình ở đây
+Common: Class dùng chung, element dùng chung
+Requests: Class định nghĩa các form request
+Reponses: Định nghĩa các class response trả về(chẳng hạn dữ liệu users, login…)
+SchemaModels: Class mapping với model tương ứng, đôi khi có một số response cần một số field khác với model trong db thì ta sẽ định nghĩa class mới tương ứng để phù hợp với response
+
+Đối với phần validation form, do data trả về sẽ như mẫu này, key ở đây là dạng string mà thuộc tính định nghĩa trong php sẽ không khai báo được biến tên như vậy nên chúng ta sẽ dùng property để định nghĩa lại
+// có cái hình ở đây
