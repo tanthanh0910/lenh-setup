@@ -1,0 +1,9 @@
+zip and upzip trên ubuntu and local
++ zip -r uploads.zip uploads/ // //nén thư mục
++ scp bee:/var/www/solueye-globarius-laravel/public/uploads.zip /Users/admin/Documents/solueye_uploads  kéo serve về local
++ scp /Users/admin/Documents/solueye_uploads/uploads.zip bee_staging2:/var/www/solueye-globarius-laravel/public/ đẩy local lên serve
++ rm -rf uploads
++ unzip uploads.zip
++ rm -rf uploads.zip 
++ sudo chown -R www-data:www-data public/ //cấp quyền
++ sudo chown -R www-data:www-data storage/
