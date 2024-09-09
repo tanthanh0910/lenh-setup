@@ -1,0 +1,76 @@
+nhiều clas giống nhau
+const signaturePads = document.querySelectorAll('.update-status-signature');
+    signaturePads.forEach((canvas, index) => {
+        const signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)',
+            velocityFilterWeight: 0.7,
+            minWidth: 0.5,
+            maxWidth: 2.5,
+            throttle: 16, // max x milliseconds on event update
+            minPointDistance: 3,
+        });
+
+        // Access the data-id attribute
+        const dataId = canvas.getAttribute('data-id');
+
+        const saveButton = document.querySelectorAll('.update-status-save')[index];
+        const clearButton = document.querySelectorAll('.update-status-clear')[index];
+
+        saveButton.addEventListener('click', function(event) {
+            if (signaturePad.points.length === 0) {
+                alert('Please signature.');
+                return;
+            }
+            var data = signaturePad.toDataURL('image/png');
+            localStorage.setItem('key_signature', data);
+        });
+
+        clearButton.addEventListener('click', function(event) {
+            signaturePad.clear();
+            localStorage.removeItem('key_signature');
+        });
+
+        var valueSignature = localStorage.getItem('key_signature');
+        var statusApprovedId = `status-approved-${dataId}`;
+        var saveButtonApproved = document.getElementById(statusApprovedId);
+        if (saveButtonApproved, 1) {
+            saveButtonApproved?.addEventListener('click', (event) => {
+                const url = '{{ route('incidents.update-status', 'incident_id') }}';
+                const url_ = url.replace('incident_id', dataId)
+                if (valueSignature) {
+                    alert('The signature field is required');
+                    return;
+                }
+                $.ajax({
+                    url: url_,
+                    type: 'put',
+                    data: {
+                        'status': 1,
+                        'signature': valueSignature
+                    },
+                    success: function(data) {
+                        if (data.status_code == 201) {
+                            alert(data.message);
+                        } else {
+                            alert(data.message);
+                            window.location = '{{ route('incidents.index') }}'
+                        }
+                    },
+                    error: function(data) {
+                        console.log('data: ', data.responseJSON.errors);
+                        _this.errors = data.responseJSON.errors;
+                    }
+                });
+            });
+
+        };
+        var statusRejectedId = `status-rejected-${dataId}`;
+        var saveButtonRejected = document.getElementById(statusRejectedId);
+        if (saveButtonRejected) {
+            saveButtonRejected?.addEventListener('click', (event) => {
+                console.log(dataId, saveButtonRejected, 2);
+            });
+        }
+    });
+nhiều clas giống nhau
