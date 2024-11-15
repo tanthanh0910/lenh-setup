@@ -28,3 +28,9 @@
 // INNER JOIN `pre_go_crm_user` AS pre
 // ON temp.usr_id = pre.usr_id
 // ORDER BY usr_created_at_data ASC, usr_id ASC;
+
+// check relation bị null
+// public function name()
+// {
+//     return $this->belongsTo(User::class)->withDefault();
+// }
