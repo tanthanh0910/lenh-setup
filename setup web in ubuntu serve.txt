@@ -219,4 +219,33 @@ server {
 
 
 
+// thành
++ mở file cat .ssh/id_rsa.pub để copy key bỏ lên server để pull hay login server ko cần mật khẩu
+ví dụ: 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCx3JNc9xCy6gprEeqnJ3VAScMSj8tkFmjisMN99Ktm2MBK9F1oMz3JG+oMChI+zTCKZr6RwX9SQxY9MuTknNEuQPP7rPVjvoUJBvIYIWYwLVmfxo+8ey4JxHnN/KAlyWPiv/x6CaHnl5UOCGCHlshAdHNG2azRJYxDP03pm5vFuqW5DesbGD2fS5SmBKsuVPUELjzx9l37U3vyt1eYYBlTe9BmEARbnMVZSKE3QmDQiIYXaK1dPyqGNEXs73nz2YO5fGCRirgmPVY8ULTy7q3KQN5i3b7XZvrnrSGuo1u9Umib7Fk/Vd7NSOCyM+er5BTiPjM9wyrGx7V8t9LX1zJypwPaA7nMcdWaPNewLyb3QuFSAyO96CvmrIgaIRCYYre3c5Gsl1NFmWhSfLDJ+R6jJohXWhICwssiNQPmOwncN0enSlIsVaaiHyN2ibtoGTgsU+hUTaDWOUnFGmUUJ9xfcoUQPeHmJYUMAHA7rmwKTDbZZFhJTujnLpGeq7PoeUs= admin@ThanhLe.local
 
++ clone source về => vào /var/www/ => rồi clone 
++ cài docker, nginx, alilas, composer, php
+
+sudo chmod -R a+rw  /root/docker_mysql
+/root/docker_mysql => ko cần gõ lệnh này chỉ là đương dẫn 
+docker run --user mysql:mysql --restart always --name mysql8 -p 3308:3306 -e MYSQL_ROOT_HOST="%" -e MYSQL_ROOT_PASSWORD="ft@123123" -v /root/docker_mysql:/var/lib/mysql -d mysql:latest => run mysql bới docker
+chạy các lệnh đó ngàoi cùng thư mực gốc 
+
+// alilas
+alias php82="/usr/bin/php8.2"
+alias composer82="/usr/bin/php8.2 /usr/local/bin/composer"
+alias sucomposer82="sudo /usr/bin/php8.2 /usr/local/bin/composer"
+alias alias_edit="sudo nano ~/.bashrc"
+alias alias_update="source ~/.bashrc"
+
+tạo chung chỉ ssl ubuntu cert Bước 1: Cài đặt Certbot
+
+search chatgpt
+
+sét quyền 
+sudo chown -R www-data:www-data /var/www/name_source_in_server/storage &&
+sudo chown -R www-data:www-data /var/www/name_source_in_server/public &&
+
+check file nginx
+/etc/nginx/sites-enabled/backend.botreviewphim.com.conf
