@@ -1,0 +1,4 @@
+1. CRUD bank account để lấy ID => https://docs.stripe.com/api/customer_bank_accounts
+2. Muốn thanh toán, thì tạo Charge với bank account id ở phần #1
+https://docs.stripe.com/api/charges/create
+Xong
