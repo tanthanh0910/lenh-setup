@@ -249,3 +249,8 @@ sudo chown -R www-data:www-data /var/www/name_source_in_server/public &&
 
 check file nginx
 /etc/nginx/sites-enabled/backend.botreviewphim.com.conf
+
+
+chayj file có sẵn trên ubuntu
+cd ~
+~/aut_letsencrypt.sh
