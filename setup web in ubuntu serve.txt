@@ -253,4 +253,4 @@ check file nginx
 
 chayj file có sẵn trên ubuntu
 cd ~
-~/aut_letsencrypt.sh
+~/aut_letsencrypt.sh ( lệnh này tạo ssl với nginx) 7.4 or 8.2
